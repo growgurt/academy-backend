@@ -31,17 +31,27 @@ stages:
 
     steps:
     - task: DotNetCoreCLI@2
-      displayName: Build
+      displayName: BuildFunctions
       inputs:
         command: 'build'
-        projects: '**/*.csproj'
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        projects: |
+          AcademyFunctions/AcademyFunctions.csproj
+        arguments: --output $(System.DefaultWorkingDirectory)/AcademyFunctions/publish_output --configuration Release
 
     - task: DotNetCoreCLI@2
-      displayName: Test
+      displayName: BuildTests
+      inputs:
+        command: 'build'
+        projects: |
+          AcademyFunctions.Test/AcademyFunctions.Test.csproj
+        arguments: --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: RunTests
       inputs:
         command: 'test'
-        projects: '**/*Test/*.csproj'
+        projects: |
+          AcademyFunctions.Test/AcademyFunctions.Test.csproj
         arguments: --configuration Release
 
     - task: ArchiveFiles@2
