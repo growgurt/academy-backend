@@ -47,7 +47,7 @@ stages:
         command: 'test'
         projects: |
           AcademyFunctions.Test/AcademyFunctions.Test.csproj
-        arguments: --configuration Release
+        arguments: --configuration Release --collect "Code coverage"
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
