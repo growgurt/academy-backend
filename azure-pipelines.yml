@@ -29,14 +29,14 @@ stages:
       displayName: Build
       inputs:
         command: 'build'
-        projects: projects: '**/*.csproj'
+        projects: '**/*.csproj'
         arguments: --configuration Release
 
     - task: DotNetCoreCLI@2
       displayName: RunTests
       inputs:
         command: 'test'
-        projects: projects: '**/*.Test.csproj'
+        projects: '**/*.Test.csproj'
         arguments: --configuration Release --collect "Code coverage"
 
     - task: ArchiveFiles@2
