@@ -26,33 +26,23 @@ stages:
 
     steps:
     - task: DotNetCoreCLI@2
-      displayName: BuildFunctions
+      displayName: Build
       inputs:
         command: 'build'
-        projects: |
-          AcademyFunctions/AcademyFunctions.csproj
-        arguments: --output $(System.DefaultWorkingDirectory)/AcademyFunctions/publish_output --configuration Release
-
-    - task: DotNetCoreCLI@2
-      displayName: BuildTests
-      inputs:
-        command: 'build'
-        projects: |
-          AcademyFunctions.Test/AcademyFunctions.Test.csproj
+        projects: projects: '**/*.csproj'
         arguments: --configuration Release
 
     - task: DotNetCoreCLI@2
       displayName: RunTests
       inputs:
         command: 'test'
-        projects: |
-          AcademyFunctions.Test/AcademyFunctions.Test.csproj
+        projects: projects: '**/*.Test.csproj'
         arguments: --configuration Release --collect "Code coverage"
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/AcademyFunctions/publish_output'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/AcademyFunctions/bin/Release/netcoreapp2.1'
         includeRootFolder: false
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip

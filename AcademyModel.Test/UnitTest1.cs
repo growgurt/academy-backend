@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace AcademyFunctions.Test
+namespace AcademyModel.Test
 {
     public class UnitTest1
     {

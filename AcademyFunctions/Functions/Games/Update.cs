@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Chris_Function_Test_One
+namespace AcademyBackend.AcademyFunctions.Functions.Games
 {
-    public static class Function1
+    public static class Update
     {
-        [FunctionName("Function1")]
+        [FunctionName("gamesUpdate")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = "test1")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "update", Route = "games/{gameId}")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
